@@ -1,0 +1,2 @@
+dff=pd.read_csv('netflix dataset.csv')
+dff.shape

@@ -1,0 +1,12 @@
+dff['cast']=dff['cast'].fillna('No Cast Specified')
+filtered_cast=pd.DataFrame()
+filtered_cast=dff['cast'].str.split(',',expand=True).stack()
+filtered_cast=filtered_cast.to_frame()
+filtered_cast.columns=['Actor']
+actors=filtered_cast.groupby(['Actor']).size().reset_index(name='Total Content')
+actors=actors[actors.Actor !='No Cast Specified']
+actors=actors.sort_values(by=['Total Content'],ascending=False)
+actorsTop5=actors.head()
+actorsTop5=actorsTop5.sort_values(by=['Total Content'])
+fig2=px.bar(actorsTop5,x='Total Content',y='Actor', title='Top 5 Actors on Netflix')
+fig2.show()
